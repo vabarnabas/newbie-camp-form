@@ -1,4 +1,4 @@
-import React from "react"
+import React, { SyntheticEvent } from "react"
 import InputLabel from "../input-label"
 
 interface Props {
@@ -8,6 +8,7 @@ interface Props {
   className?: string
   label?: string
   required?: boolean
+  onChange: (e: SyntheticEvent) => void
 }
 
 const FormInput: React.FC<Props> = ({
@@ -15,7 +16,9 @@ const FormInput: React.FC<Props> = ({
   placeholder,
   required,
   label,
+  value,
   className,
+  onChange,
 }) => {
   return (
     <div className="">
@@ -23,8 +26,10 @@ const FormInput: React.FC<Props> = ({
       <input
         className={`w-full rounded-md bg-gray-100 py-1 px-3 text-sm outline-none dark:bg-gray-700 ${className}`}
         type={type}
+        value={value}
         placeholder={placeholder}
         required={required || false}
+        onChange={(e) => onChange(e)}
       />
     </div>
   )

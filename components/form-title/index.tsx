@@ -1,10 +1,9 @@
 import React from "react"
 import { HiArrowLeft } from "react-icons/hi"
+import { Steps } from "../../types/steps.types"
 
-export interface Props {
+export interface Props extends Steps {
   text: string
-  currentStep: number
-  maxSteps: number
 }
 
 const FormTitle: React.FC<Props> = ({ text, currentStep, maxSteps }) => {

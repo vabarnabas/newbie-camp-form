@@ -1,0 +1,28 @@
+{
+  "maxSteps": 3,
+  "1": {
+    "pageName": "",
+    "fields": [
+      {
+        "type": "text",
+        "title": "Full Name",
+        "required": true
+      },
+      {
+        "type": "text",
+        "title": "Neptun Code",
+        "required": true
+      },
+      {
+        "type": "radio",
+        "title": "Member Type",
+        "required": true,
+        "options": [
+          "Newbie",
+          "Member",
+          "Alumni"
+        ]
+      }
+    ]
+  }
+}
