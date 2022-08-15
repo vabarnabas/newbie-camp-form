@@ -1,3 +1,4 @@
+import { useRouter } from "next/router"
 import React from "react"
 import { HiArrowLeft } from "react-icons/hi"
 import { Steps } from "../../types/steps.types"
@@ -6,11 +7,16 @@ export interface Props extends Steps {
   text: string
 }
 
-const FormTitle: React.FC<Props> = ({ text, currentStep, maxSteps }) => {
+const FormTitle: React.FC<Props> = ({ text, currentStep }) => {
+  const router = useRouter()
+
   return (
     <div className="absolute inset-x-0 top-0 flex w-fit items-center bg-inherit bg-white px-4 py-3 text-xl font-bold dark:bg-gray-800">
       {currentStep !== 1 && (
-        <HiArrowLeft className="mr-2 cursor-pointer text-base hover:text-soft-green" />
+        <HiArrowLeft
+          onClick={() => router.push(`/${currentStep - 1}`)}
+          className="mr-2 cursor-pointer text-base hover:text-soft-green"
+        />
       )}
       <p className="text-soft-green">
         <span>{`${currentStep}.`}</span>

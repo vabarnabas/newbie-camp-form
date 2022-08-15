@@ -2,7 +2,7 @@ import React, { SyntheticEvent } from "react"
 import InputLabel from "../input-label"
 
 interface Props {
-  type: "text" | "number" | "email" | "tel"
+  type: "text" | "number" | "email" | "tel" | "date"
   value: string | number
   placeholder?: string
   className?: string

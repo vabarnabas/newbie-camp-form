@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Form from "../../components/form"
 import FormInput from "../../components/form-input"
 import FormRadioGroup from "../../components/form-radio"
+import { FormSwitch } from "../../components/form-switch"
 import Layout from "../../components/layout"
 import { useFormStorage } from "../../providers/form.provider"
 import { updateForm } from "../../services/updateForm"
@@ -32,48 +33,26 @@ const Page: NextPage = () => {
       <Form
         onSubmit={() => {
           modifyStorage(formValues)
-          router.push("/2")
+          router.push("/3")
         }}
-        title="Basic Information"
+        title="Stay"
       >
         <div className="space-y-2">
           <FormInput
-            type="text"
-            value={formValues.fullName}
+            type="date"
+            value={formValues.dateOfBirth}
             onChange={(e) =>
               updateForm(
                 (e.target as HTMLInputElement).value,
-                "fullName",
+                "dateOfBirth",
                 formValues,
                 setFormValues
               )
             }
-            label="Full Name"
+            label="Date of Birth"
             required
           />
-          <FormInput
-            type="text"
-            onChange={(e) =>
-              updateForm(
-                (e.target as HTMLInputElement).value,
-                "neptunCode",
-                formValues,
-                setFormValues
-              )
-            }
-            value={formValues.neptunCode}
-            label="Neptun Code"
-            required
-          />
-          <FormRadioGroup
-            options={["Newbie", "Member", "Alumni"]}
-            label="Member Status"
-            value={formValues.memberStatus}
-            onChange={(e) => {
-              updateForm(e, "memberStatus", formValues, setFormValues)
-            }}
-            required
-          />
+          <FormSwitch />
         </div>
       </Form>
     </Layout>
