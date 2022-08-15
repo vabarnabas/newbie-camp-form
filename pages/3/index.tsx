@@ -24,9 +24,10 @@ const Page: NextPage = () => {
         ...formStorage,
         memberStatus: formStorage.memberStatus || "Newbie",
       } as FormValues)
-      console.log(formStorage.memberStatus || "Newbie")
     }
   }, [formStorage])
+
+  console.log(formValues.alcohol)
 
   return (
     <Layout>
@@ -52,7 +53,18 @@ const Page: NextPage = () => {
             label="Date of Birth"
             required
           />
-          <FormSwitch />
+          <FormSwitch
+            onChange={() =>
+              updateForm(
+                !formValues.alcohol ?? true,
+                "alcohol",
+                formValues,
+                setFormValues
+              )
+            }
+            value={formValues.alcohol}
+            title="Would you like to drink alcohol?"
+          />
         </div>
       </Form>
     </Layout>
