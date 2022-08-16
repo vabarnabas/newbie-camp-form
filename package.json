@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^0.0.0-insiders.486ac80",
+    "@stripe/stripe-js": "^1.35.0",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0"
