@@ -34,9 +34,9 @@ const Page: NextPage = () => {
       <Form
         onSubmit={() => {
           modifyStorage(formValues)
-          router.push("/3")
+          router.push("/4")
         }}
-        title="Stay"
+        title="Accomodation"
       >
         <div className="space-y-2">
           <FormInput
