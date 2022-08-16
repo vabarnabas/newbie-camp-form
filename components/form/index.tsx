@@ -16,14 +16,7 @@ const Form: React.FC<Props> = ({ children, title, onSubmit, description }) => {
   const { getCurrentStep } = useCurrentStep()
 
   return (
-    <div className="flex h-full w-full select-none items-start justify-center pt-4">
-      {title && getCurrentStep() && (
-        <FormTitle
-          currentStep={getCurrentStep() || 1}
-          maxSteps={4}
-          text={title}
-        />
-      )}
+    <div className="relative flex h-full w-full select-none items-start justify-center pt-4">
       <form
         onSubmit={(e) => {
           e.preventDefault()
@@ -36,8 +29,15 @@ const Form: React.FC<Props> = ({ children, title, onSubmit, description }) => {
           {description && <p className="">{description}</p>}
         </div>
         {children}
-        <FormButton text="Continue" />
+        <FormButton text="Tovább" />
       </form>
+      {title && getCurrentStep() && (
+        <FormTitle
+          currentStep={getCurrentStep() || 1}
+          maxSteps={4}
+          text={title}
+        />
+      )}
       <FormTracker currentStep={getCurrentStep() || 0} maxSteps={4} />
     </div>
   )

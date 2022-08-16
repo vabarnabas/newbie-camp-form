@@ -8,27 +8,43 @@ import FormRadioGroup from "../../components/form-radio"
 import { FormSwitch } from "../../components/form-switch"
 import Layout from "../../components/layout"
 import { useFormStorage } from "../../providers/form.provider"
+import { getTickets } from "../../services/api/getTickets"
 import { updateForm } from "../../services/updateForm"
 import { FormValues } from "../../types/formvalues.types"
+import { Ticket } from "../../types/tickets.types"
 
 const Page: NextPage = () => {
   const { formStorage, modifyStorage } = useFormStorage()
   const router = useRouter()
   const [formValues, setFormValues] = useState({
     ...formStorage,
-    memberStatus: formStorage.memberStatus || "Newbie",
   } as FormValues)
+  const [tickets, setTickets] = useState<Ticket[]>([])
 
   useEffect(() => {
     if (Object.keys(formStorage).length !== 0) {
       setFormValues({
         ...formStorage,
-        memberStatus: formStorage.memberStatus || "Newbie",
       } as FormValues)
     }
   }, [formStorage])
 
-  console.log(formValues.alcohol)
+  useEffect(() => {
+    const getData = async () => {
+      setTickets(await getTickets())
+    }
+
+    getData()
+  }, [])
+
+  useEffect(() => {
+    if (!formStorage.ticketId && tickets.length !== 0) {
+      setFormValues({
+        ...formStorage,
+        ticketId: tickets[0].stripeId,
+      } as FormValues)
+    }
+  }, [tickets])
 
   return (
     <Layout>
@@ -39,43 +55,38 @@ const Page: NextPage = () => {
         }}
         title="Jegyek"
       >
-        <div className="">
-          <p className="mb-3 pl-1 text-lg font-bold">Napi Jegyek</p>
-          <div className="grid gap-x-4 gap-y-2 md:grid-cols-2">
-            <FormCard
-              title="Bevonó Tábor (Hétfő)"
-              price={3500}
-              description="Belépő a Bevonó Tábor egy éjszakájára a hétfői napon."
-            />
-            <FormCard
-              title="Bevonó Tábor (Kedd)"
-              price={3500}
-              description="Belépő a Bevonó Tábor egy éjszakájára a keddi napon."
-            />
-            <FormCard
-              title="Bevonó Tábor (Szerda)"
-              price={3500}
-              description="Belépő a Bevonó Tábor egy éjszakájára a szerdai napon."
-            />
-          </div>
-          <p className="my-3 pl-1 text-lg font-bold">Kétnapos Jegyek</p>
-          <div className="grid gap-x-4 gap-y-2 md:grid-cols-2">
-            <FormCard
-              title="Bevonó Tábor (Hétfő)"
-              price={3500}
-              description="Belépő a Bevonó Tábor egy éjszakájára a hétfői napon."
-            />
-            <FormCard
-              title="Bevonó Tábor (Kedd)"
-              price={3500}
-              description="Belépő a Bevonó Tábor egy éjszakájára a keddi napon."
-            />
-            <FormCard
-              title="Bevonó Tábor (Szerda)"
-              price={3500}
-              description="Belépő a Bevonó Tábor egy éjszakájára a szerdai napon."
-            />
-          </div>
+        <div className="space-y-3">
+          {[
+            ...new Map(
+              tickets.map((ticket) => [ticket.groupName, ticket])
+            ).values(),
+          ].map((ticket) => (
+            <div className="">
+              <p className="mb-3 pl-1 text-lg font-bold">{ticket.groupName}</p>
+              <div className="grid gap-x-4 gap-y-2 md:grid-cols-2">
+                {tickets
+                  .filter(
+                    (subTicket) => subTicket.groupName === ticket.groupName
+                  )
+                  .map((subTicket) => (
+                    <FormCard
+                      title={subTicket.displayName}
+                      price={subTicket.price}
+                      description={subTicket.description}
+                      onClick={() =>
+                        updateForm(
+                          subTicket.stripeId,
+                          "ticketId",
+                          formValues,
+                          setFormValues
+                        )
+                      }
+                      isSelected={formValues.ticketId === subTicket.stripeId}
+                    />
+                  ))}
+              </div>
+            </div>
+          ))}
         </div>
       </Form>
     </Layout>

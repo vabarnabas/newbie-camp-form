@@ -13,4 +13,7 @@ export interface FormValues {
   studentIdNumber: string
   // Page 3
   alcohol: boolean
+
+  // Page 4
+  ticketId: string
 }
