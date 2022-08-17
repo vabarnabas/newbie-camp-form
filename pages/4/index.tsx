@@ -7,6 +7,7 @@ import FormInput from "../../components/form-input"
 import FormRadioGroup from "../../components/form-radio"
 import { FormSwitch } from "../../components/form-switch"
 import Layout from "../../components/layout"
+import Spinner from "../../components/spinner"
 import { useFormStorage } from "../../providers/form.provider"
 import { getTickets } from "../../services/api/getTickets"
 import { updateForm } from "../../services/updateForm"
@@ -48,16 +49,16 @@ const Page: NextPage = () => {
 
   return (
     <Layout>
-      <Form
-        onSubmit={() => {
-          modifyStorage(formValues)
-          router.push("/3")
-        }}
-        title="Jegyek"
-      >
-        <div className="space-y-3">
-          {tickets.length !== 0 &&
-            [
+      {tickets.length !== 0 ? (
+        <Form
+          onSubmit={() => {
+            modifyStorage(formValues)
+            router.push("/3")
+          }}
+          title="Jegyek"
+        >
+          <div className="space-y-3">
+            {[
               ...new Map(
                 tickets.map((ticket) => [ticket.groupName, ticket])
               ).values(),
@@ -92,8 +93,11 @@ const Page: NextPage = () => {
                 </div>
               </div>
             ))}
-        </div>
-      </Form>
+          </div>
+        </Form>
+      ) : (
+        <Spinner />
+      )}
     </Layout>
   )
 }
