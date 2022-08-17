@@ -10,6 +10,7 @@ import Layout from "../../components/layout"
 import Spinner from "../../components/spinner"
 import { useFormStorage } from "../../providers/form.provider"
 import { getTickets } from "../../services/api/getTickets"
+import { checkout } from "../../services/stripe/checkout"
 import { updateForm } from "../../services/updateForm"
 import { FormValues } from "../../types/formvalues.types"
 import { Ticket } from "../../types/tickets.types"
@@ -53,7 +54,7 @@ const Page: NextPage = () => {
         <Form
           onSubmit={() => {
             modifyStorage(formValues)
-            router.push("/3")
+            checkout([{ price: formValues.ticket.stripeId, quantity: 1 }])
           }}
           title="Jegyek"
         >
