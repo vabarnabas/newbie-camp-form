@@ -56,39 +56,42 @@ const Page: NextPage = () => {
         title="Jegyek"
       >
         <div className="space-y-3">
-          {[
-            ...new Map(
-              tickets.map((ticket) => [ticket.groupName, ticket])
-            ).values(),
-          ].map((ticket) => (
-            <div className="">
-              <p className="mb-3 pl-1 text-lg font-bold">{ticket.groupName}</p>
-              <div className="grid gap-x-4 gap-y-2 md:grid-cols-2">
-                {tickets
-                  .filter(
-                    (subTicket) => subTicket.groupName === ticket.groupName
-                  )
-                  .map((subTicket) => (
-                    <FormCard
-                      title={subTicket.displayName}
-                      price={subTicket.price}
-                      description={subTicket.description}
-                      onClick={() =>
-                        updateForm(
-                          subTicket.stripeId,
-                          "ticketId",
-                          formValues,
-                          setFormValues
-                        )
-                      }
-                      isSelected={
-                        formValues.ticket.stripeId === subTicket.stripeId
-                      }
-                    />
-                  ))}
+          {tickets.length !== 0 &&
+            [
+              ...new Map(
+                tickets.map((ticket) => [ticket.groupName, ticket])
+              ).values(),
+            ].map((ticket) => (
+              <div className="">
+                <p className="mb-3 pl-1 text-lg font-bold">
+                  {ticket.groupName}
+                </p>
+                <div className="grid gap-x-4 gap-y-2 md:grid-cols-2">
+                  {tickets
+                    .filter(
+                      (subTicket) => subTicket.groupName === ticket.groupName
+                    )
+                    .map((subTicket) => (
+                      <FormCard
+                        title={subTicket.displayName}
+                        price={subTicket.price}
+                        description={subTicket.description}
+                        onClick={() =>
+                          updateForm(
+                            subTicket,
+                            "ticket",
+                            formValues,
+                            setFormValues
+                          )
+                        }
+                        isSelected={
+                          formValues.ticket?.stripeId === subTicket.stripeId
+                        }
+                      />
+                    ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </Form>
     </Layout>
