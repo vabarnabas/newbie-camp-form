@@ -38,10 +38,10 @@ const Page: NextPage = () => {
   }, [])
 
   useEffect(() => {
-    if (!formStorage.ticketId && tickets.length !== 0) {
+    if (!formStorage.ticket && tickets.length !== 0) {
       setFormValues({
         ...formStorage,
-        ticketId: tickets[0].stripeId,
+        ticket: tickets[0],
       } as FormValues)
     }
   }, [tickets])
@@ -81,7 +81,9 @@ const Page: NextPage = () => {
                           setFormValues
                         )
                       }
-                      isSelected={formValues.ticketId === subTicket.stripeId}
+                      isSelected={
+                        formValues.ticket.stripeId === subTicket.stripeId
+                      }
                     />
                   ))}
               </div>

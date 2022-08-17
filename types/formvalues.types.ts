@@ -1,3 +1,5 @@
+import { Ticket } from "./tickets.types"
+
 export interface FormValues {
   // Page 1
   fullName: string
@@ -15,5 +17,5 @@ export interface FormValues {
   alcohol: boolean
 
   // Page 4
-  ticketId: string
+  ticket: Ticket
 }
