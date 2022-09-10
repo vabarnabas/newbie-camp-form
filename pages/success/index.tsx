@@ -20,9 +20,9 @@ const Success: NextPage = () => {
             kiküldjük számodra a nyugtát tartalmazó e-mailt és a további
             információkat is.
           </p>
-          <button className="mt-5 w-full rounded-md bg-soft-green py-1 px-3 text-sm text-white outline-none hover:bg-soft-green-dark">
+          {/* <button className="mt-5 w-full rounded-md bg-soft-green py-1 px-3 text-sm text-white outline-none hover:bg-soft-green-dark">
             Azonosító Másolása
-          </button>
+          </button> */}
         </div>
       </Form>
     </Layout>
