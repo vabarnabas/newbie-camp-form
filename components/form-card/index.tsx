@@ -18,8 +18,10 @@ const FormCard: React.FC<Props> = ({
   return (
     <div
       onClick={() => onClick()}
-      className={`relative box-border cursor-pointer rounded-md bg-gray-700 p-4 ${
-        isSelected ? "border border-soft-green" : ""
+      className={`relative box-border cursor-pointer rounded-md border bg-gray-100 p-4 dark:bg-gray-700 ${
+        isSelected
+          ? " border-soft-green"
+          : "border-gray-100 dark:border-gray-700"
       }`}
     >
       {isSelected && (

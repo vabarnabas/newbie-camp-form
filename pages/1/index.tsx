@@ -34,7 +34,7 @@ const Page: NextPage = () => {
           modifyStorage(formValues)
           router.push("/2")
         }}
-        title="Basic Information"
+        title="Alapvető Információk"
       >
         <div className="space-y-2">
           <FormInput
@@ -48,7 +48,7 @@ const Page: NextPage = () => {
                 setFormValues
               )
             }
-            label="Full Name"
+            label="Teljes Név"
             required
           />
           <FormInput
@@ -62,12 +62,12 @@ const Page: NextPage = () => {
               )
             }
             value={formValues.neptunCode}
-            label="Neptun Code"
+            label="Neptun Kód"
             required
           />
           <FormRadioGroup
-            options={["Newbie", "Member", "Alumni"]}
-            label="Member Status"
+            options={["Newbie", "Tag", "Alumni"]}
+            label="Tagsági Státusz"
             value={formValues.memberStatus}
             onChange={(e) => {
               updateForm(e, "memberStatus", formValues, setFormValues)

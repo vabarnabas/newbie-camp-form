@@ -15,7 +15,24 @@ export interface FormValues {
   studentIdNumber: string
   // Page 3
   alcohol: boolean
+  alcoholOptions: AlcoholOption[]
+  likeToEat:
+    | "Saját magamnak oldanám meg"
+    | "A táborban felkínált ételeket fogyasztanám"
+  foodSensitivities: FoodSensitivity[]
+  likeToHelp: boolean
+  helpOptions: HelpOption[]
 
   // Page 4
   ticket: Ticket
 }
+
+export type AlcoholOption = "Sör" | "Bor" | "Vodka" | "Cider" | "Tequila"
+
+export type FoodSensitivity = "Tej" | "Glutén" | "Mogyoró" | "Tojás"
+
+export type HelpOption =
+  | "Csapatépítés"
+  | "Állomás Tartása"
+  | "Főzés"
+  | "Szakmai Esemény"

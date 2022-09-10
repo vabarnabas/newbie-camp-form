@@ -23,6 +23,6 @@ export const checkout = async (lineItems: LineItem[] | undefined) => {
     mode: "payment",
     lineItems,
     successUrl: `${window.location.origin}?sessionId={CHECKOUT_SESSION_ID}`,
-    cancelUrl: window.location.origin,
+    cancelUrl: `${window.location.origin}/4`,
   })
 }

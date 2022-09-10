@@ -34,8 +34,8 @@ const Page: NextPage = () => {
           modifyStorage(formValues)
           router.push("/3")
         }}
-        title="Personal Information"
-        description="This data is for the owners of the place, to have us identified."
+        title="Személyes Adatok"
+        description="Ezekre az információkra a szállásnak van szüksége a becsekkoláshoz, egyéb esetben nem használjuk fel őket."
       >
         <div className="space-y-2">
           <FormInput
@@ -49,7 +49,7 @@ const Page: NextPage = () => {
                 setFormValues
               )
             }
-            label="Date of Birth"
+            label="Születési Dátum"
             required
           />
           <FormInput
@@ -63,7 +63,7 @@ const Page: NextPage = () => {
               )
             }
             value={formValues.placeOfBirth}
-            label="Place of Birth"
+            label="Születési Hely"
             required
           />
           <FormInput
@@ -77,7 +77,7 @@ const Page: NextPage = () => {
               )
             }
             value={formValues.zipCode}
-            label="ZIP Code"
+            label="Irányítószám"
             required
           />
           <FormInput
@@ -91,7 +91,7 @@ const Page: NextPage = () => {
               )
             }
             value={formValues.city}
-            label="City"
+            label="Város"
             required
           />
           <FormInput
@@ -105,7 +105,7 @@ const Page: NextPage = () => {
               )
             }
             value={formValues.address}
-            label="Address"
+            label="Cím"
             required
           />
           <FormInput
@@ -119,7 +119,7 @@ const Page: NextPage = () => {
               )
             }
             value={formValues.idNumber}
-            label="ID Number"
+            label="Személyi Igazolvány Száma"
             required
           />
           <FormInput
@@ -133,7 +133,7 @@ const Page: NextPage = () => {
               )
             }
             value={formValues.studentIdNumber}
-            label="Student ID Number"
+            label="Diákigazolvány Száma"
             required
           />
         </div>
