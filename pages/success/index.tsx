@@ -1,14 +1,30 @@
 import type { NextPage } from "next"
 import { useRouter } from "next/router"
-import { BsDot } from "react-icons/bs"
+import { useEffect } from "react"
 import Form from "../../components/form"
 import Layout from "../../components/layout"
 import { useCurrentStep } from "../../hooks/useCurrentStep"
+import { useFormStorage } from "../../providers/form.provider"
+import { submit } from "../../services/api/submit"
 
 const Success: NextPage = () => {
   const router = useRouter()
+  const { formStorage } = useFormStorage()
 
   const { sessionId } = router.query
+
+  useEffect(() => {
+    const createData = async () => {
+      await submit(
+        formStorage,
+        Array.isArray(sessionId) ? sessionId[0] : sessionId || ""
+      )
+    }
+
+    if (sessionId) {
+      createData()
+    }
+  }, [router.isReady])
 
   return (
     <Layout>

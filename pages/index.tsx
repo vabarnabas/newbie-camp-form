@@ -30,12 +30,12 @@ const Home: NextPage = () => {
                 · A tábor időpontja: 2022. október 7-9.
               </p>
               <p className="px-2 py-0.5">
-                · A tábor helyszíne:Balatonlelle, Köztársaság u. 65, 8638 (BME
+                · A tábor helyszíne: Balatonlelle, Köztársaság u. 65, 8638 (BME
                 Ifjúsági Tábor)
               </p>
               <p className="px-2 py-0.5">
                 · A fizetés a kérdőív végén, idén először online fizetéssel
-                történik, amennyiben ezt nem tudjátok rögtön megtenni ne
+                történik, amennyiben ezt nem tudjátok rögtön megtenni, ne
                 aggódjatok, hiszen a már leadott válaszokat a böngészőtök
                 elmenti.
               </p>

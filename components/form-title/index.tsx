@@ -11,7 +11,7 @@ const FormTitle: React.FC<Props> = ({ text, currentStep }) => {
   const router = useRouter()
 
   return (
-    <div className="fixed inset-x-0 top-0 flex w-full items-center bg-inherit bg-white px-4 py-3 text-xl font-bold dark:bg-gray-800">
+    <div className="fixed inset-x-0 top-0 z-50 flex w-full items-center bg-inherit bg-white px-4 py-3 text-xl font-bold dark:bg-gray-800">
       {currentStep !== 1 && (
         <HiArrowLeft
           onClick={() => router.push(`/${currentStep - 1}`)}

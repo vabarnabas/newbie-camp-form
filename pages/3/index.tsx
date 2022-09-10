@@ -12,7 +12,6 @@ import { useFormStorage } from "../../providers/form.provider"
 import { updateForm } from "../../services/updateForm"
 import {
   AlcoholOption,
-  FoodSensitivity,
   FormValues,
   HelpOption,
 } from "../../types/formvalues.types"
@@ -34,15 +33,12 @@ const Page: NextPage = () => {
         ...formStorage,
         memberStatus: formStorage.memberStatus || "Newbie",
         alcoholOptions: formStorage.alcoholOptions || [],
-        foodSensitivities: formStorage.foodSensitivities || [],
         helpOptions: formStorage.helpOptions || [],
       } as FormValues)
     }
   }, [formStorage])
 
-  console.log(formValues.alcoholOptions)
-
-  const handleAlcoholSelection = (id: AlcoholOption) => {
+  const handleAlcoholSelection = (id: string) => {
     formValues.alcoholOptions.includes(id)
       ? updateForm(
           formValues.alcoholOptions.filter((option) => option !== id),
@@ -58,23 +54,7 @@ const Page: NextPage = () => {
         )
   }
 
-  const handleAllergySelection = (id: FoodSensitivity) => {
-    formValues.foodSensitivities.includes(id)
-      ? updateForm(
-          formValues.foodSensitivities.filter((option) => option !== id),
-          "foodSensitivities",
-          formValues,
-          setFormValues
-        )
-      : updateForm(
-          [...formValues.foodSensitivities, id],
-          "foodSensitivities",
-          formValues,
-          setFormValues
-        )
-  }
-
-  const handleHelpSelection = (id: HelpOption) => {
+  const handleHelpSelection = (id: string) => {
     formValues.helpOptions.includes(id)
       ? updateForm(
           formValues.helpOptions.filter((option) => option !== id),
@@ -116,7 +96,7 @@ const Page: NextPage = () => {
             <FormCheckGroup
               options={["Sör", "Cider", "Vodka", "Bor", "Tequila"]}
               values={formValues.alcoholOptions}
-              label="Mit Innál szívesen?"
+              label="Mit innál szívesen?"
               onChange={(id) => handleAlcoholSelection(id as AlcoholOption)}
               description="Több lehetőséget is választhatsz!"
             />
@@ -135,12 +115,19 @@ const Page: NextPage = () => {
           />
           {formValues.likeToEat ===
             "A táborban felkínált ételeket fogyasztanám" && (
-            <FormCheckGroup
-              options={["Tej", "Glutén", "Mogyoró", "Tojás"]}
-              values={formValues.foodSensitivities}
-              label="Van-e bármilyen ételallergiád vagy olyan étel, amit kifejezetten nem szeretsz?"
-              onChange={(id) => handleAllergySelection(id as FoodSensitivity)}
-              description="Több lehetőséget is választhatsz!"
+            <FormInput
+              type="text"
+              onChange={(e) =>
+                updateForm(
+                  (e.target as HTMLInputElement).value,
+                  "foodSensitivities",
+                  formValues,
+                  setFormValues
+                )
+              }
+              value={formValues.foodSensitivities}
+              label="Milyen ételérzékenységeid vannak?"
+              required
             />
           )}
           <FormSwitch
@@ -157,11 +144,15 @@ const Page: NextPage = () => {
           />
           {formValues.likeToHelp && (
             <FormCheckGroup
-              options={["Csapatépítés", "Állomás", "Főzés", "Szakmai Esemény"]}
+              options={[
+                "Csapatépítés (Alkoholmentes)",
+                "Állomás (Nagyvetélkedő)",
+                "Főzés",
+              ]}
               values={formValues.helpOptions}
-              label="Mit Innál szívesen?"
+              label="Miben vennél részt?"
               onChange={(id) => handleHelpSelection(id as HelpOption)}
-              description="Miben vennél részt?"
+              description="Több lehetőséget is választhatsz!"
             />
           )}
         </div>
