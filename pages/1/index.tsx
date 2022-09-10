@@ -53,6 +53,20 @@ const Page: NextPage = () => {
           />
           <FormInput
             type="text"
+            value={formValues.email}
+            onChange={(e) =>
+              updateForm(
+                (e.target as HTMLInputElement).value,
+                "email",
+                formValues,
+                setFormValues
+              )
+            }
+            label="E-mail cím"
+            required
+          />
+          <FormInput
+            type="text"
             onChange={(e) =>
               updateForm(
                 (e.target as HTMLInputElement).value,

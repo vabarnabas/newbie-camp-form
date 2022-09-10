@@ -5,7 +5,10 @@ interface LineItem {
   quantity?: number | undefined
 }
 
-export const checkout = async (lineItems: LineItem[] | undefined) => {
+export const checkout = async (
+  lineItems: LineItem[] | undefined,
+  customerEmail: string
+) => {
   let stripePromise: Promise<Stripe | null>
 
   const getStripe = () => {
@@ -22,7 +25,9 @@ export const checkout = async (lineItems: LineItem[] | undefined) => {
   await stripe?.redirectToCheckout({
     mode: "payment",
     lineItems,
-    successUrl: `${window.location.origin}?sessionId={CHECKOUT_SESSION_ID}`,
+    
+    successUrl: `${window.location.origin}/success?sessionId={CHECKOUT_SESSION_ID}`,
     cancelUrl: `${window.location.origin}/4`,
+    customerEmail: customerEmail,
   })
 }

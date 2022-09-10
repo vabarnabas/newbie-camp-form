@@ -54,7 +54,10 @@ const Page: NextPage = () => {
         <Form
           onSubmit={() => {
             modifyStorage(formValues)
-            checkout([{ price: formValues.ticket.stripeId, quantity: 1 }])
+            checkout(
+              [{ price: formValues.ticket.stripeId, quantity: 1 }],
+              formValues.email
+            )
           }}
           title="Jegyek"
         >

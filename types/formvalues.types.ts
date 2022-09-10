@@ -3,6 +3,7 @@ import { Ticket } from "./tickets.types"
 export interface FormValues {
   // Page 1
   fullName: string
+  email: string
   neptunCode: string
   memberStatus: "Newbie" | "Member" | "Alumni"
   // Page 2

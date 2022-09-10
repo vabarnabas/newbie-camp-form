@@ -29,7 +29,7 @@ const Form: React.FC<Props> = ({ children, title, onSubmit, description }) => {
           {description && <p className="">{description}</p>}
         </div>
         {children}
-        <FormButton text="Tovább" />
+        {onSubmit && <FormButton text="Tovább" />}
       </form>
       {title && getCurrentStep() && (
         <FormTitle
