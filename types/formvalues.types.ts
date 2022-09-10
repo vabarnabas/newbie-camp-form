@@ -5,7 +5,7 @@ export interface FormValues {
   fullName: string
   email: string
   neptunCode: string
-  memberStatus: "Newbie" | "Member" | "Alumni"
+  memberStatus: "Newbie" | "Tag" | "Alumni"
   // Page 2
   dateOfBirth: number
   placeOfBirth: string
@@ -23,6 +23,7 @@ export interface FormValues {
   foodSensitivities: string
   likeToHelp: boolean
   helpOptions: string[]
+  enablers: string[]
 
   // Page 4
   ticket: Ticket

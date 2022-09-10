@@ -9,6 +9,7 @@ import FormRadioGroup from "../../components/form-radio"
 import { FormSwitch } from "../../components/form-switch"
 import Layout from "../../components/layout"
 import { useFormStorage } from "../../providers/form.provider"
+import { getEnablers } from "../../services/getEnablers"
 import { updateForm } from "../../services/updateForm"
 import {
   AlcoholOption,
@@ -25,6 +26,7 @@ const Page: NextPage = () => {
     alcoholOptions: formStorage.alcoholOptions || [],
     foodSensitivities: formStorage.foodSensitivities || [],
     helpOptions: formStorage.helpOptions || [],
+    enablers: formStorage.enablers || [],
   } as FormValues)
 
   useEffect(() => {
@@ -70,11 +72,13 @@ const Page: NextPage = () => {
         )
   }
 
+  console.log(formValues.enablers)
+
   return (
     <Layout>
       <Form
         onSubmit={() => {
-          modifyStorage(formValues)
+          modifyStorage({ ...formValues, enablers: getEnablers(formValues) })
           router.push("/4")
         }}
         title="Preferenciák"
@@ -127,7 +131,6 @@ const Page: NextPage = () => {
               }
               value={formValues.foodSensitivities}
               label="Milyen ételérzékenységeid vannak?"
-              required
             />
           )}
           <FormSwitch
