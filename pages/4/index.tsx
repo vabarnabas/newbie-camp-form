@@ -40,8 +40,6 @@ const Page: NextPage = () => {
     getData()
   }, [])
 
-  console.log(formValues.enablers)
-
   useEffect(() => {
     if (!formStorage.ticket && tickets.length !== 0) {
       setFormValues({
@@ -85,7 +83,7 @@ const Page: NextPage = () => {
                       .filter(
                         (subTicket) =>
                           subTicket.enablers.filter(() =>
-                            formValues.enablers.some((b) =>
+                            getEnablers(formValues).some((b) =>
                               subTicket.enablers.includes(b)
                             )
                           ).length !== 0
@@ -93,7 +91,7 @@ const Page: NextPage = () => {
                       .filter(
                         (subTicket) =>
                           subTicket.disablers.filter(() =>
-                            formValues.enablers.some((b) =>
+                            getEnablers(formValues).some((b) =>
                               subTicket.disablers.includes(b)
                             )
                           ).length === 0
