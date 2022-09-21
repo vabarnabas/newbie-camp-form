@@ -5,7 +5,7 @@ import Form from "../../components/form"
 import Layout from "../../components/layout"
 import { useCurrentStep } from "../../hooks/useCurrentStep"
 import { useFormStorage } from "../../providers/form.provider"
-import { submit } from "../../services/api/submit"
+import { submitCreate, submitUpdate } from "../../services/api/submit"
 
 const Success: NextPage = () => {
   const router = useRouter()
@@ -15,9 +15,10 @@ const Success: NextPage = () => {
 
   useEffect(() => {
     const createData = async () => {
-      await submit(
+      await submitUpdate(
         formStorage,
-        Array.isArray(sessionId) ? sessionId[0] : sessionId || ""
+        Array.isArray(sessionId) ? sessionId[0] : sessionId || "",
+        formStorage.answerId
       )
     }
 

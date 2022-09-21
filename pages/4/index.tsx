@@ -21,6 +21,7 @@ const Page: NextPage = () => {
   const router = useRouter()
   const [formValues, setFormValues] = useState({
     ...formStorage,
+    nightStay: formStorage.nightStay || "Péntek",
   } as FormValues)
   const [tickets, setTickets] = useState<Ticket[]>([])
 
@@ -28,6 +29,7 @@ const Page: NextPage = () => {
     if (Object.keys(formStorage).length !== 0) {
       setFormValues({
         ...formStorage,
+        nightStay: formStorage.nightStay || "Péntek",
       } as FormValues)
     }
   }, [formStorage])
@@ -80,22 +82,22 @@ const Page: NextPage = () => {
                         (subTicket) => subTicket.groupName === ticket.groupName
                       )
                       .filter((subTicket) => subTicket.isActive)
-                      .filter(
-                        (subTicket) =>
-                          subTicket.enablers.filter(() =>
-                            getEnablers(formValues).some((b) =>
-                              subTicket.enablers.includes(b)
-                            )
-                          ).length !== 0
-                      )
-                      .filter(
-                        (subTicket) =>
-                          subTicket.disablers.filter(() =>
-                            getEnablers(formValues).some((b) =>
-                              subTicket.disablers.includes(b)
-                            )
-                          ).length === 0
-                      )
+                      // .filter(
+                      //   (subTicket) =>
+                      //     subTicket.enablers.filter(() =>
+                      //       getEnablers(formValues).some((b) =>
+                      //         subTicket.enablers.includes(b)
+                      //       )
+                      //     ).length !== 0
+                      // )
+                      // .filter(
+                      //   (subTicket) =>
+                      //     subTicket.disablers.filter(() =>
+                      //       getEnablers(formValues).some((b) =>
+                      //         subTicket.disablers.includes(b)
+                      //       )
+                      //     ).length === 0
+                      // )
                       .map((subTicket) => (
                         <FormCard
                           key={subTicket.id}
@@ -118,6 +120,17 @@ const Page: NextPage = () => {
                   </div>
                 </div>
               ))}
+            {formValues.ticket && formValues.ticket.displayName.includes("1") && (
+              <FormRadioGroup
+                options={["Péntek", "Szombat"]}
+                label="Melyik éjszaka maradnál?"
+                value={formValues.nightStay}
+                onChange={(e) => {
+                  updateForm(e, "nightStay", formValues, setFormValues)
+                }}
+                required
+              />
+            )}
           </div>
         </Form>
       ) : (

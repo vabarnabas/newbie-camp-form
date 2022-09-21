@@ -6,7 +6,5 @@ export interface Ticket {
   price: number
   groupName: string
   isActive: boolean
-  enablers: string[]
-  disablers: string[]
   groupIndex: number
 }

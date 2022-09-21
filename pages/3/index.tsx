@@ -9,6 +9,7 @@ import FormRadioGroup from "../../components/form-radio"
 import { FormSwitch } from "../../components/form-switch"
 import Layout from "../../components/layout"
 import { useFormStorage } from "../../providers/form.provider"
+import { submitCreate, submitUpdate } from "../../services/api/submit"
 import { getEnablers } from "../../services/getEnablers"
 import { updateForm } from "../../services/updateForm"
 import {
@@ -72,17 +73,26 @@ const Page: NextPage = () => {
         )
   }
 
-  console.log(formValues.enablers)
+  const onSubmit = async () => {
+    await modifyStorage({ ...formValues })
+    if (!formStorage.answerId) {
+      console.log("No answer ID")
+      const answer = await submitCreate(formValues)
+      console.log(answer.id)
+      await updateForm(answer.id, "answerId", formValues, setFormValues)
+      await modifyStorage({ ...formValues, answerId: answer.id })
+      console.log(formStorage.answerId)
+    } else {
+      await submitUpdate(formValues, "", formStorage.answerId || "")
+    }
+    router.push("/4")
+  }
+
+  console.log(formValues)
 
   return (
     <Layout>
-      <Form
-        onSubmit={() => {
-          modifyStorage({ ...formValues, enablers: getEnablers(formValues) })
-          router.push("/4")
-        }}
-        title="Preferenciák"
-      >
+      <Form onSubmit={() => onSubmit()} title="Preferenciák">
         <div className="space-y-2">
           <FormSwitch
             onChange={() =>
@@ -133,18 +143,20 @@ const Page: NextPage = () => {
               label="Milyen ételérzékenységeid vannak?"
             />
           )}
-          <FormSwitch
-            onChange={() =>
-              updateForm(
-                !formValues.likeToHelp ?? true,
-                "likeToHelp",
-                formValues,
-                setFormValues
-              )
-            }
-            value={formValues.likeToHelp}
-            title="Szeretnél valahogyan bekapcsolódni a szervezői munkába?"
-          />
+          {formValues.memberStatus !== "Newbie" && (
+            <FormSwitch
+              onChange={() =>
+                updateForm(
+                  !formValues.likeToHelp ?? true,
+                  "likeToHelp",
+                  formValues,
+                  setFormValues
+                )
+              }
+              value={formValues.likeToHelp}
+              title="Szeretnél valahogyan bekapcsolódni a szervezői munkába?"
+            />
+          )}
           {formValues.likeToHelp && (
             <FormCheckGroup
               options={[

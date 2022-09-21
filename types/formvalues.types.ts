@@ -27,6 +27,9 @@ export interface FormValues {
 
   // Page 4
   ticket: Ticket
+  nightStay: string
+
+  answerId: string
 }
 
 export type AlcoholOption = "Sör" | "Bor" | "Vodka" | "Cider" | "Tequila"
