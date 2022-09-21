@@ -21,6 +21,8 @@ import {
 const Page: NextPage = () => {
   const { formStorage, modifyStorage } = useFormStorage()
   const router = useRouter()
+  const [fetching, setFetching] = useState(false)
+  const [error, setError] = useState("")
   const [formValues, setFormValues] = useState({
     ...formStorage,
     memberStatus: formStorage.memberStatus || "Newbie",
@@ -74,17 +76,23 @@ const Page: NextPage = () => {
   }
 
   const onSubmit = async () => {
+    setFetching(true)
     await modifyStorage({ ...formValues })
-    if (!formStorage.answerId) {
-      console.log("No answer ID")
-      const answer = await submitCreate(formValues)
-      console.log(answer.id)
-      await updateForm(answer.id, "answerId", formValues, setFormValues)
-      await modifyStorage({ ...formValues, answerId: answer.id })
-      console.log(formStorage.answerId)
-    } else {
-      await submitUpdate(formValues, "", formStorage.answerId || "")
+    try {
+      if (!formStorage.answerId) {
+        console.log("No answer ID")
+        const answer = await submitCreate(formValues)
+        console.log(answer.id)
+        await updateForm(answer.id, "answerId", formValues, setFormValues)
+        await modifyStorage({ ...formValues, answerId: answer.id })
+        console.log(formStorage.answerId)
+      } else {
+        await submitUpdate(formValues, "", formStorage.answerId || "")
+      }
+    } catch {
+      setError("Something went wrong.")
     }
+    setFetching(false)
     router.push("/4")
   }
 
@@ -92,7 +100,11 @@ const Page: NextPage = () => {
 
   return (
     <Layout>
-      <Form onSubmit={() => onSubmit()} title="Preferenciák">
+      <Form
+        onSubmit={() => onSubmit()}
+        title="Preferenciák"
+        disabled={fetching}
+      >
         <div className="space-y-2">
           <FormSwitch
             onChange={() =>

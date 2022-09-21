@@ -10,9 +10,16 @@ interface Props {
   title?: string
   description?: string
   onSubmit?: () => void
+  disabled?: boolean
 }
 
-const Form: React.FC<Props> = ({ children, title, onSubmit, description }) => {
+const Form: React.FC<Props> = ({
+  children,
+  title,
+  onSubmit,
+  description,
+  disabled,
+}) => {
   const { getCurrentStep } = useCurrentStep()
 
   return (
@@ -29,7 +36,7 @@ const Form: React.FC<Props> = ({ children, title, onSubmit, description }) => {
           {description && <p className="">{description}</p>}
         </div>
         {children}
-        {onSubmit && <FormButton text="Tovább" />}
+        {onSubmit && <FormButton text="Tovább" disabled={disabled} />}
       </form>
       {title && getCurrentStep() && (
         <FormTitle

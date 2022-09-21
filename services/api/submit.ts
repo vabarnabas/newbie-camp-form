@@ -39,11 +39,13 @@ export const submitUpdate = async (
           formValues: JSON.stringify(formValues),
           createdAt: new Date(Date.now()).toISOString(),
           ticketId: formValues.ticket?.id || null,
-          isActive: true,
+          isActive: formValues.ticket ? true : false,
           sessionId: sessionId,
         }),
       }
     )
+    console.log(formValues.ticket ? true : false)
+
     const data = await response.json()
     return data
   }
