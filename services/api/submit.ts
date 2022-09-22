@@ -1,6 +1,9 @@
 import { FormValues } from "../../types/formvalues.types"
 
-export const submitCreate = async (formValues: FormValues) => {
+export const submitCreate = async (
+  formValues: FormValues,
+  sessionId?: string
+) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/answers`, {
     method: "POST",
     headers: {
@@ -12,8 +15,8 @@ export const submitCreate = async (formValues: FormValues) => {
       formValues: JSON.stringify(formValues),
       createdAt: new Date(Date.now()).toISOString(),
       // ticketId: "",
-      isActive: true,
-      sessionId: "",
+      isActive: false,
+      sessionId: sessionId || "",
     }),
   })
   const data = await response.json()

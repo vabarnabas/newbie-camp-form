@@ -1,6 +1,7 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react"
 import React from "react"
 import { BsFillCheckCircleFill } from "react-icons/bs"
+import { HiChevronDown, HiChevronUp } from "react-icons/hi"
 import { FormValues } from "../../types/formvalues.types"
 interface Props {
   title: string
@@ -23,7 +24,14 @@ const AnswerCard: React.FC<Props> = ({
       className={`cursor-pointer rounded-md bg-gray-100 p-4 dark:bg-gray-700`}
     >
       <div ref={ref} className="">
-        <p className="pr-6 text-lg font-bold leading-tight">{title}</p>
+        <div className="flex items-center justify-between">
+          <p className="pr-6 text-lg font-bold leading-tight">{title}</p>
+          {isSelected ? (
+            <HiChevronDown className="text-xl" />
+          ) : (
+            <HiChevronUp className="text-xl" />
+          )}
+        </div>
         {isSelected && (
           <div className="mt-3 flex flex-col text-sm font-light">
             <div className="inline-flex space-x-1">
