@@ -1,12 +1,13 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react"
 import React from "react"
 import { BsFillCheckCircleFill } from "react-icons/bs"
-import { HiChevronDown, HiChevronUp } from "react-icons/hi"
+import { HiCheckCircle, HiChevronDown, HiChevronUp } from "react-icons/hi"
 import { FormValues } from "../../types/formvalues.types"
 interface Props {
   title: string
   formValues: FormValues
   isSelected: boolean
+  isActive: boolean
   onClick: (...params: any) => void
 }
 
@@ -14,6 +15,7 @@ const AnswerCard: React.FC<Props> = ({
   title,
   formValues,
   isSelected,
+  isActive,
   onClick,
 }) => {
   const [ref] = useAutoAnimate<HTMLDivElement>()
@@ -25,7 +27,10 @@ const AnswerCard: React.FC<Props> = ({
     >
       <div ref={ref} className="">
         <div className="flex items-center justify-between">
-          <p className="pr-6 text-lg font-bold leading-tight">{title}</p>
+          <div className="inline-flex items-center justify-start">
+            <p className="text-lg font-bold leading-tight">{title}</p>
+            {isActive && <HiCheckCircle className="ml-1 text-soft-green" />}
+          </div>
           {isSelected ? (
             <HiChevronDown className="text-xl" />
           ) : (

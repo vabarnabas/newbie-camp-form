@@ -79,6 +79,7 @@ const Page: NextPage = () => {
                 formValues={JSON.parse(answer.formValues)}
                 title={answer.userName}
                 isSelected={selected.includes(answer.id)}
+                isActive={answer.isActive}
               />
             ))}
           </div>
