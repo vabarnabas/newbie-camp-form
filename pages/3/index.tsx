@@ -39,6 +39,8 @@ const Page: NextPage = () => {
         memberStatus: formStorage.memberStatus || "Newbie",
         alcoholOptions: formStorage.alcoholOptions || [],
         helpOptions: formStorage.helpOptions || [],
+        likeToEat:
+          formStorage.likeToEat || "A táborban felkínált ételeket fogyasztanám",
       } as FormValues)
     }
   }, [formStorage])
