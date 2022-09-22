@@ -52,7 +52,7 @@ const Page: NextPage = () => {
             required
           />
           <FormInput
-            type="text"
+            type="email"
             value={formValues.email}
             onChange={(e) =>
               updateForm(
