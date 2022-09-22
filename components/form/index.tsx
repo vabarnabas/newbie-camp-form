@@ -11,6 +11,7 @@ interface Props {
   description?: string
   onSubmit?: () => void
   disabled?: boolean
+  hide?: boolean
 }
 
 const Form: React.FC<Props> = ({
@@ -19,6 +20,7 @@ const Form: React.FC<Props> = ({
   onSubmit,
   description,
   disabled,
+  hide,
 }) => {
   const { getCurrentStep } = useCurrentStep()
 
@@ -36,16 +38,18 @@ const Form: React.FC<Props> = ({
           {description && <p className="">{description}</p>}
         </div>
         {children}
-        {onSubmit && <FormButton text="Tovább" disabled={disabled} />}
+        {!hide && onSubmit && <FormButton text="Tovább" disabled={disabled} />}
       </form>
-      {title && getCurrentStep() && (
+      {!hide && title && getCurrentStep() && (
         <FormTitle
           currentStep={getCurrentStep() || 1}
           maxSteps={4}
           text={title}
         />
       )}
-      <FormTracker currentStep={getCurrentStep() || 0} maxSteps={4} />
+      {!hide && (
+        <FormTracker currentStep={getCurrentStep() || 0} maxSteps={4} />
+      )}
     </div>
   )
 }

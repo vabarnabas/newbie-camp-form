@@ -62,6 +62,16 @@ const Home: NextPage = () => {
               </div>
             </div>
           </div>
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              localStorage.removeItem("formStorage")
+              router.reload()
+            }}
+            className="mt-5 w-full rounded-md py-1 px-3 text-sm text-soft-green outline-none ring-1 ring-soft-green hover:text-soft-green-dark disabled:bg-slate-400"
+          >
+            Eddig megadott adatok törlése
+          </button>
         </div>
       </Form>
     </Layout>
