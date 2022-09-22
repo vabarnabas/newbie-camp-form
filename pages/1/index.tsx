@@ -79,6 +79,20 @@ const Page: NextPage = () => {
             label="Neptun Kód"
             required
           />
+          <FormInput
+            type="text"
+            value={formValues.favoriteMeme}
+            onChange={(e) =>
+              updateForm(
+                (e.target as HTMLInputElement).value,
+                "favoriteMeme",
+                formValues,
+                setFormValues
+              )
+            }
+            label="Mi a kedvenc Meme-d?"
+            required
+          />
           <FormRadioGroup
             options={["Newbie", "Tag", "Alumni"]}
             label="Tagsági Státusz"

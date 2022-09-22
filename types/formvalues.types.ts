@@ -24,6 +24,7 @@ export interface FormValues {
   likeToHelp: boolean
   helpOptions: string[]
   enablers: string[]
+  favoriteMeme: string
 
   // Page 4
   ticket: Ticket
