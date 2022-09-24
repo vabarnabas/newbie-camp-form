@@ -24,7 +24,7 @@ const Home: NextPage = () => {
             <p className="text-sm font-semibold">Fontos Tudnivalók:</p>
             <div className="mt-1 flex flex-col space-y-1 text-sm">
               <p className="px-2 py-0.5">
-                · Jelentkezési határidő: 2022. szeptember 30.
+                · Jelentkezési határidő: 2022. szeptember 26 23:59.
               </p>
               <p className="px-2 py-0.5">
                 · A tábor időpontja: 2022. október 7-9.
