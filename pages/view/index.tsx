@@ -42,35 +42,37 @@ const Page: NextPage = () => {
           <div ref={ref} className="space-y-3">
             <div className="">
               <p className="text-xl font-bold">{`${answers.length} Jelentkezés`}</p>
-              {[
-                ...new Map(
-                  answers
-                    .filter(
-                      (answer) =>
-                        JSON.parse(answer.formValues).ticket !== undefined
-                    )
-                    .map((answer) => [
-                      JSON.parse(answer.formValues).ticket.displayName,
-                      answer,
-                    ])
-                ).values(),
-              ].map((answer) => (
-                <div className="inline-flex space-x-1">
-                  <p className="font-semibold">
-                    {`${JSON.parse(answer.formValues).ticket.displayName}:`}
-                  </p>
-                  <p className="">
-                    {`${
-                      answers.filter(
-                        (subAnswer) =>
-                          JSON.parse(subAnswer.formValues)?.ticket
-                            ?.displayName ===
-                          JSON.parse(answer.formValues).ticket.displayName
-                      ).length
-                    } db`}
-                  </p>
-                </div>
-              ))}
+              <div className="flex flex-col">
+                {[
+                  ...new Map(
+                    answers
+                      .filter(
+                        (answer) =>
+                          JSON.parse(answer.formValues).ticket !== undefined
+                      )
+                      .map((answer) => [
+                        JSON.parse(answer.formValues).ticket.displayName,
+                        answer,
+                      ])
+                  ).values(),
+                ].map((answer) => (
+                  <div className="inline-flex space-x-1">
+                    <p className="font-semibold">
+                      {`${JSON.parse(answer.formValues).ticket.displayName}:`}
+                    </p>
+                    <p className="">
+                      {`${
+                        answers.filter(
+                          (subAnswer) =>
+                            JSON.parse(subAnswer.formValues)?.ticket
+                              ?.displayName ===
+                            JSON.parse(answer.formValues).ticket.displayName
+                        ).length
+                      } db`}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
             {answers.map((answer) => (
               <AnswerCard
